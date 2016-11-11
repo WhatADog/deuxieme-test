@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Petit test</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript">
+		// try if the api is available or not for the browser used
+		function start(){
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(success, error)
+			} else {
+				alert("Geolocation API is not available on your browser")
+			};
+		}
+		// Waiting for the document to be rendered
+		window.onload = start
+
+
+		function success(position){
+			console.log("Your position was detected");
+			console.log("Your position is " + position.coords.latitude + " , " + position.coords.longitude)
+			var iframe = document.createElement('iframe');
+			iframe.width="600"
+			iframe.height="450"
+			iframe.src="https://www.google.com/maps/embed/v1/streetview?key=AIzaSyAJuPBNuPOchDpprIMZlYRAOZDPwVdgJME&location=" +position.coords.latitude + "," + position.coords.longitude + 
+			"&heading=210&pitch=10&fov=35"
+			document.body.appendChild(iframe);
+		}
+
+		function error(err){
+			console.log("Some error occured")
+		}
+	</script>
 </head>
 <body>
-	<h1>Bonjour et bienvenue sur ce magnifique website !</h1>
-
+	
+	
 </body>
 </html>
